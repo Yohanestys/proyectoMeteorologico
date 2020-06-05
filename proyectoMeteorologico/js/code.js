@@ -163,7 +163,7 @@ const showAllTime = (tiempoEntero) => {
     div.style.flexWrap = "wrap";
     div.style.position = "relative";
     div.style.bottom = "0";
-    div.style.marginTop = "20.5%";
+    div.style.marginTop = "11.5%";
     //div.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
 
     var dias = 7;
