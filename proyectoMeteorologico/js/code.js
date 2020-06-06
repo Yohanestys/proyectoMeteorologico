@@ -88,56 +88,104 @@ const getAllTime = (pos) => {
 }
 
 
-const showCurrentTime = (tiempoActual) => {
+const showCurrentTime = (tiempoActual, tiempoEntero) => {
+
+    var parentDiv = document.createElement("div");
+    parentDiv.style.position = "sticky";
+    parentDiv.style.display = "flex";
+    parentDiv.style.justifyContent = "center";
+    parentDiv.style.backgroundColor = "rgba(128, 128, 128, 0.6)";
+    parentDiv.style.marginBottom = "4%";
+    parentDiv.style.top = "2%";
+    container.appendChild(parentDiv);
+
+
+    var parent2Div = document.createElement("div");
+    parent2Div.style.display = "flex";
+    parent2Div.style.justifyContent = "center";
+    container.appendChild(parent2Div);
+
+
     var div = document.createElement("div");
-    div.style.width = "100%";
-    div.style.position = "sticky";
-    div.style.top = "3%";
-    div.style.display = "flex";
-    div.style.flexDirection = "column";
-    //div.style.borderBottom = "150px solid rgba(128,128,128, 0.7)"
+    div.style.backgroundColor = "rgba(128, 128, 128, 0.6)"
+    div.style.paddingRight = "2em";
+    div.style.marginRight = "1px";
+    div.style.borderRadius = "5px";
+    div.style.borderTopRightRadius = "0";
+    div.style.borderBottomRightRadius = "0";
+    parent2Div.appendChild(div);
+
+
+    var div2 = document.createElement("div");
+    parentDiv.appendChild(div2);
+
+
+    var div3 = document.createElement("div");
+    div3.style.backgroundColor = "rgba(128, 128, 128, 0.6)";
+    div3.style.display = "flex";
+    div3.style.flexDirection = "column";
+    div3.style.justifyContent = "center";
+    div3.style.alignContent = "center";
+    div3.style.alignItems = "center";
+    div3.style.borderRadius = "5px";
+    div3.style.borderTopLeftRadius = "0";
+    div3.style.borderBottomLeftRadius = "0";
+    parent2Div.appendChild(div3);
+
     var divs = [];
     var span = [];
     var i = 0;
-    while (i < 6) {
+    while (i < 8) {
 
-        divs[i] = document.createElement("div");
         span[i] = document.createElement("span");
-        divs[i].appendChild(span[i]);
-        divs[i].style.display = "flex";
-        divs[i].style.justifyContent = "center";
-        divs[i].style.alignContent = "center";
-        divs[i].style.alignItems = "center";
-        divs[i].style.flexDirection = "row";
-        divs[i].style.flexWrap = "wrap";
-        divs[i].style.flex = "1";
-        divs[i].style.border = "solid 1px gray";
-        if (i > 2) {
-            span[i].style.fontSize = "0.8em";
+
+        if (i < 6) {
+
+            divs[i] = document.createElement("div");
+            divs[i].appendChild(span[i]);
+            div.appendChild(divs[i]);
+            divs[i].style.display = "flex";
+            divs[i].style.justifyContent = "center";
+            divs[i].style.alignContent = "center";
+            divs[i].style.alignItems = "center";
+            divs[i].style.flexDirection = "row";
+            divs[i].style.flexWrap = "wrap";
+            divs[i].style.flex = "1";
+            divs[i].style.padding = "2px";
         }
 
-        //div.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+        if (i < 6) {
+            span[i].style.fontSize = "0.8em";
+            span[i].style.border = "1px solid gray";
+            span[i].style.borderLeft = "0";
+            span[i].style.borderRight = "0";
+        }
+
         span[i].style.padding = "5px";
-        span[i].style.borderRadius = "5px";
         span[i].style.color = "#fff";
-        span[i].style.width = "17%";
-        span[i].style.margin = "1px";
-        div.appendChild(divs[i]);
-        span[i].style.backgroundColor = "rgba(128, 128, 128, 0.6)";
+        span[i].style.width = "100%";
+        span[i].style.textAlign = "justify";
         i++;
     }
 
-    //divs[2].style.backgroundColor = "rgba(128, 128, 128, 0.6)";
-    span[2].style.fontSize = "2.4em";
-    span[2].style.marginLeft = "0";
-    span[2].style.width = "calc(17% - 1.3em)";
-    span[0].textContent = `Hoy`;
-    span[1].textContent = `El tiempo actual en ${tiempoActual.name} es`;
-    span[2].textContent = `${(tiempoActual.main.temp)}℃`;
-    span[3].textContent = ` máx ${tiempoActual.main.temp_max}℃`
-    span[4].textContent = ` min ${tiempoActual.main.temp_min}℃`
-    span[5].textContent = ` Humedad ${tiempoActual.main.humidity}%`;
+    span[0].textContent = ` Máx ${tiempoEntero.daily[0].temp.max}℃`
+    span[1].textContent = ` Min ${tiempoEntero.daily[0].temp.min}℃`
+    span[2].textContent = ` Humedad ${tiempoActual.main.humidity}%`;
+    span[3].textContent = ` Viento ${tiempoActual.wind.speed}`;
+    span[4].textContent = ` Precion ${tiempoActual.main.pressure}.0 mbar`;
+    span[5].textContent = ` Nublado ${tiempoActual.clouds.all}%`;
 
+    span[6].style.fontSize = "2.4em";
+    span[7].style.fontSize = "8.4em";
+    span[6].textContent = `Hoy en ${tiempoActual.name}`;
+    var sup = document.createElement("sup");
+    sup.textContent = "℃";
+    sup.style.color = "#fff";
+    sup.style.fontSize = "0.5em";
+    sup.style.alignSelf = "flex-end";
+    //sup.style.justifySelf = "flex-start";
+    span[7].textContent = `${(tiempoActual.main.temp)}`;
+    span[7].style.backgroundColor = "transparent";
     /*** */
     if (tiempoActual.weather[0].icon) {
         var img = document.createElement("img");
@@ -146,18 +194,19 @@ const showCurrentTime = (tiempoActual) => {
         img.setAttribute("src", ruta);
         img.setAttribute("alt", "weather icon");
         img.style.borderRadius = "5px";
-        img.style.backgroundColor = "rgba(128, 128, 128, 0.6)";
-        divs[2].insertBefore(img, divs[2].firstChild);
-
+        //img.style.alignSelf = "flex-end";
+        div2.appendChild(span[6]); // Título
+        div3.insertBefore(img, div3.firstChild);
+        div3.insertBefore(span[7], sup.nextSibling);
+        span[7].insertBefore(sup, span[7].nextSibling);
 
     }
 
     div.style.textAlign = "center";
     div.style.textShadow = "3px 3px gray";
     div.style.fontSize = "2em";
-    container.appendChild(div);
-}
 
+}
 
 const showAllTime = (tiempoEntero) => {
     var diaSiguiente = indexDia;
@@ -173,19 +222,20 @@ const showAllTime = (tiempoEntero) => {
     div.style.flexWrap = "wrap";
     div.style.position = "relative";
     div.style.bottom = "0";
-    div.style.marginTop = "11.5%";
+    div.style.marginTop = "8.5%";
     //div.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
 
     var dias = 7;
     var a;
     for (var i = 0; i < dias; i++) {
         if (tiempoEntero.daily[i].weather[0].icon) {
+            diaSiguiente += 1;
             var index = (i);
             var indexMiddle = (index + 1);
             var indexMax = (indexMiddle + 1);
-            diaSiguiente += 1;
             var span = [];
             var divs = [];
+
             divs[i] = document.createElement("div");
             divs[i].setAttribute("class", "tiempoSemana");
             divs[i].style.display = "flex";
@@ -193,23 +243,12 @@ const showAllTime = (tiempoEntero) => {
             divs[i].style.alignContent = "center";
             divs[i].style.flexDirection = "column";
             divs[i].style.padding = "1em";
-
-            //divs[i].style.border = "1px solid gray";
             divs[i].style.backgroundColor = "rgba(128,128,128, 0.6)";
             divs[i].style.margin = "2em 0.2em";
             divs[i].style.borderRadius = "5px";
-            if (div.style.display === "flex") {
-                divs[i].style.borderLeft = "0";
-            }
-
-            if (divs[0] != undefined) {
-                divs[0].style.borderLeft = "1px solid gray";
-            }
-
 
             if (i >= 3) {
                 divs[i].style.display = "none";
-
             }
 
             span[index] = document.createElement("span");
@@ -299,18 +338,16 @@ function showHideDivs(a, div) {
                 a.style.backgroundColor = "rgba(255,255,255, 0.6)";
                 a.style.color = "gray";
 
-
             }
         }
     }
 
 }
 
-
 window.onload = () => {
-    container = document.getElementsByTagName("div")[0];
     var body = document.body;
     body.style.backgroundImage = "url('img/seasonWalpaller3.jpg')";
+    container = document.getElementsByTagName("div")[0];
     container.style.backgroundColor = "rgba(255, 255, 255, 0.3)";
     main();
     console.log("Hola mundo cruel!");
@@ -325,10 +362,11 @@ window.onload = () => {
         setTimeout(getCurrentTime(position), 3600000);
         console.log("Position.lan " + position.latitude);
         var tiempoActual = JSON.parse(window.localStorage.getItem("tiempoActual"));
-        showCurrentTime(tiempoActual);
+
 
         setTimeout(getAllTime(position), 3600000);
         var tiempoEntero = JSON.parse(window.localStorage.getItem("tiempoEntero"));
+        showCurrentTime(tiempoActual, tiempoEntero);
         showAllTime(tiempoEntero);
 
     } else {
