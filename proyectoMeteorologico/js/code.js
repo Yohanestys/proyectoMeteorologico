@@ -173,7 +173,7 @@ const showAllTime = (tiempoEntero) => {
             var index = (i);
             var indexMiddle = (index + 1);
             var indexMax = (indexMiddle + 1);
-            diaSiguiente += 1;
+            
             var span = [];
             var divs = [];
             divs[i] = document.createElement("div");
@@ -257,7 +257,7 @@ const showAllTime = (tiempoEntero) => {
             a.style.fontSize = "2em";
             div.insertBefore(a, div.lastChild.nextSibling);
             a.addEventListener('click', () => { showHideDivs(a, div); });
-
+            diaSiguiente += 1;
         }
     }
 
