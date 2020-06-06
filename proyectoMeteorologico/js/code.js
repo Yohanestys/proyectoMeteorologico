@@ -172,7 +172,7 @@ const showCurrentTime = (tiempoActual, tiempoEntero) => {
     span[1].textContent = ` Min ${tiempoEntero.daily[0].temp.min}℃`
     span[2].textContent = ` Humedad ${tiempoActual.main.humidity}%`;
     span[3].textContent = ` Viento ${tiempoActual.wind.speed}`;
-    span[4].textContent = ` Precion ${tiempoActual.main.pressure}.0 mbar`;
+    span[4].textContent = ` Presión ${tiempoActual.main.pressure}.0 mbar`;
     span[5].textContent = ` Nublado ${tiempoActual.clouds.all}%`;
 
     span[6].style.fontSize = "2.4em";
