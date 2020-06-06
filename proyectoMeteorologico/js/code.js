@@ -93,6 +93,8 @@ const showCurrentTime = (tiempoActual) => {
     div.style.width = "100%";
     div.style.position = "sticky";
     div.style.top = "3%";
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
     //div.style.borderBottom = "150px solid rgba(128,128,128, 0.7)"
     var divs = [];
     var span = [];
@@ -104,8 +106,12 @@ const showCurrentTime = (tiempoActual) => {
         divs[i].appendChild(span[i]);
         divs[i].style.display = "flex";
         divs[i].style.justifyContent = "center";
+        divs[i].style.alignContent = "center";
+        divs[i].style.alignItems = "center";
+        divs[i].style.flexDirection = "row";
         divs[i].style.flexWrap = "wrap";
         divs[i].style.flex = "1";
+        divs[i].style.border = "solid 1px gray";
         if (i > 2) {
             span[i].style.fontSize = "0.8em";
         }
@@ -114,15 +120,17 @@ const showCurrentTime = (tiempoActual) => {
         span[i].style.padding = "5px";
         span[i].style.borderRadius = "5px";
         span[i].style.color = "#fff";
+        span[i].style.width = "17%";
+        span[i].style.margin = "1px";
         div.appendChild(divs[i]);
-        divs[i].style.backgroundColor = "rgba(128, 128, 128, 0.6)";
+        span[i].style.backgroundColor = "rgba(128, 128, 128, 0.6)";
         i++;
     }
 
     //divs[2].style.backgroundColor = "rgba(128, 128, 128, 0.6)";
-    divs[2].style.transition = "rgba(128, 128, 128, 0), .5s";
     span[2].style.fontSize = "2.4em";
-
+    span[2].style.marginLeft = "0";
+    span[2].style.width = "calc(17% - 1.3em)";
     span[0].textContent = `Hoy`;
     span[1].textContent = `El tiempo actual en ${tiempoActual.name} es`;
     span[2].textContent = `${(tiempoActual.main.temp)}℃`;
@@ -138,7 +146,9 @@ const showCurrentTime = (tiempoActual) => {
         img.setAttribute("src", ruta);
         img.setAttribute("alt", "weather icon");
         img.style.borderRadius = "5px";
+        img.style.backgroundColor = "rgba(128, 128, 128, 0.6)";
         divs[2].insertBefore(img, divs[2].firstChild);
+
 
     }
 
