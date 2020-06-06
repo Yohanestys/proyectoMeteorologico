@@ -173,7 +173,7 @@ const showAllTime = (tiempoEntero) => {
             var index = (i);
             var indexMiddle = (index + 1);
             var indexMax = (indexMiddle + 1);
-            
+            diaSiguiente += 1;
             var span = [];
             var divs = [];
             divs[i] = document.createElement("div");
@@ -212,15 +212,20 @@ const showAllTime = (tiempoEntero) => {
             img.setAttribute("src", ruta);
             img.setAttribute("alt", `"weather icon ${(i+1)}"`);
 
+            if (diaSiguiente >= 7) {
+                diaSiguiente = 0;
+            }
+
             if (indexMiddle === 1) {
                 span[index].textContent = `${diaDeManiana}`;
-            } else if (diaSiguiente === 7) {
-                diaSiguiente = 0;
-                span[index].textContent = `${diasSemana[diaSiguiente]}`;
+                if (diaSiguiente === 6) {
+                    diaSiguiente += indexMiddle;
+                }
             } else {
                 span[index].textContent = `${diasSemana[diaSiguiente]}`;
 
             }
+
             span[indexMiddle].textContent = `${tiempoEntero.daily[(i+1)].temp.max} ℃`
             span[indexMax].textContent = `${tiempoEntero.daily[(i+1)].temp.min} ℃`
 
@@ -241,7 +246,6 @@ const showAllTime = (tiempoEntero) => {
             divs[i].style.alignItems = "center";
             div.appendChild(divs[i]);
 
-            correct = false;
             if (a === undefined) {
                 a = document.createElement("a");
             }
@@ -257,7 +261,7 @@ const showAllTime = (tiempoEntero) => {
             a.style.fontSize = "2em";
             div.insertBefore(a, div.lastChild.nextSibling);
             a.addEventListener('click', () => { showHideDivs(a, div); });
-            diaSiguiente += 1;
+
         }
     }
 
